@@ -20,14 +20,15 @@ $estAdulte = null; // null = aucune valeur d'aucun type
 
 // TON CODE ICI
 
-if($age<18){
-
-    $estAdulte=false;
-    echo ('false');
+// si l'age est supérieur ou égal à 18 ans
+if ($age >= 18) {
+    // alors la personne est adulte
+    $estAdulte = true;
 }
-else{
-    $estAdulte=true;
-    echo ('true');
+// sinon
+else {
+    // la personne n'est pas adulte
+    $estAdulte = false;
 }
 
 // FIN DE TON CODE
@@ -45,35 +46,52 @@ $estAdulte = null;
 
 // TON CODE ICI
 
+// on prévoit des valeurs par défaut
+// on pourrait considérer que par défaut la personne est adulte
+$estAdulte = true;
+$estEnfant = false;
 
-if($age<18){
+// Enfant ou adulte ?
+// si l'age est inférieur à 18 ans
+if ($age < 18) {
+    // enfant
+    $estEnfant = true;
+    $estAdulte = false;
+}
+// // sinon 
+// else {
+//     // adulte
+//     $estAdulte = true;
+// }
 
-    $estEnfant=true;
-    echo ('est enfant true');
-    echo $age;
+// version alternative
+$estEnfant = $age < 18; // bool
+$estAdulte = $age >= 18; // bool
+
+// Adolescent ?
+// si l'age est compris entre 10 et 19
+// => si l'âge est supérieur ou égal à 10 et si l'age inférieur ou égal à 19 alors ça veut dire que c'est un adolescent
+// (c) manon-g
+// if ($age > 9 && $age < 20) est équivalent
+if ($age >= 10 && $age <= 19) {
+    // ado
+    $estAdolescent = true;
 }
 
-else if($age>9 && $age<20){
+// alternative
+// 1. PHP va interpréter le && => deux conditions à vérifier
+// 2. Vérif de la première condition (à gauche)
+// 3. Remplacer les variables par leur valeur (ici par ex. 13 >= 10)
+// 4. Convertir le teste de gauche en bool 
+// 5. Si la première condition est vérifiée (a renvoyé true), PHP évalue la deuxième condition (sinon il renvoie false immédiatement)
+$estAdolescent = $age >= 10 && $age <= 19;// bool
 
-    $estAdolescent=true;
-    echo ('est Ado true');
-}
-else{
-
-
-    $estAdulte=true;
-    echo ('est Adulte true');
-    echo $age;
-
-}
 // FIN DE TON CODE
 if (isset($aOk) && $aOk) {
-    echo $age;
     displayExo('conditions-b');
     $bOk = checkVariableValue(array('estEnfant'=>$age<18, 'estAdolescent'=>$age>9&&$age<20, 'estAdulte'=>($age>=18)));
-    
+
     displayEnd($bOk);
-    
 }
 
 /* BONUS
